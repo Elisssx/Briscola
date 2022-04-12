@@ -222,10 +222,11 @@ int main()
 
     inizializzaMazzo(m); // Ciao
 
+    // Funzione che distribuisce le tre carte in mano al giocatore
+    distribuisciCarte(m);
+
     while (!controllo(m)) 
     {
-        // Funzione che distribuisce le tre carte in mano al giocatore
-        distribuisciCarte(m);
 
         mossaComputer(m);
         mossaUtente(m);
