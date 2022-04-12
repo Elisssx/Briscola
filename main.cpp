@@ -1,7 +1,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <time.h>
-using namespace std;//cazzo
+using namespace std;//cazzo in figa
  
 struct Carta 
 {
