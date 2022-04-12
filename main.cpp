@@ -220,7 +220,7 @@ int main()
     else if (s == 3)
         m.briscola = "Coppe";
 
-    inizializzaMazzo(m);
+    inizializzaMazzo(m); // Ciao
 
     while (!controllo(m)) 
     {
