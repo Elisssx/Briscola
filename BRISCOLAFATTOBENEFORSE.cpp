@@ -5,20 +5,20 @@ using namespace std;
  
 struct Carta 
 {
-    string carta; // es. asso…valori numerici per capire quale carta è piu alta?
+    string carta; // es. assoï¿½valori numerici per capire quale carta ï¿½ piu alta?
     int valore;
     string seme;
     bool briscola;
-    bool uscita; // La carta è già uscita?
-    bool distribuita; // La carta è già stata distribuita?
+    bool uscita; // La carta ï¿½ giï¿½ uscita?
+    bool distribuita; // La carta ï¿½ giï¿½ stata distribuita?
 };
 struct Mano
 {
-    string semeIniziale; // Il seme che è stato giocato per prima nella mano
+    string semeIniziale; // Il seme che ï¿½ stato giocato per prima nella mano
     Carta carteGiocatore[20]; // Carte utente
     Carta carteComputer[20]; // Carte computer
-    Carta cartaATerra; // Carta che è appena stata gettata dal computer
-    bool giocatore; // Quale giocatore ha giocato per primo in questa mano? True se è il computer, False se è l'umano.
+    Carta cartaATerra; // Carta che ï¿½ appena stata gettata dal computer
+    bool giocatore; // Quale giocatore ha giocato per primo in questa mano? True se ï¿½ il computer, False se ï¿½ l'umano.
 };
 struct Partita
 {
@@ -39,8 +39,8 @@ void inizializzaMazzo(Partita &m)
 {
     for (int i = 0; i < 40; i++) // Ciclo for per assegnare valore alle carte del mazzo
 	{
-        m.mazzo[i].uscita = false; // All'inizio nessuna carta è ancora uscita
-        m.mazzo[i].distribuita = false; // All'inizio nessuna carta è ancora stata distribuita
+        m.mazzo[i].uscita = false; // All'inizio nessuna carta ï¿½ ancora uscita
+        m.mazzo[i].distribuita = false; // All'inizio nessuna carta ï¿½ ancora stata distribuita
         if (i%10 == 0) 
         {
             m.mazzo[i].carta = "Asso";
@@ -100,7 +100,7 @@ void inizializzaMazzo(Partita &m)
         if (i%4 == 3)
             m.mazzo[i].seme = "Coppe";
     }
-    // Dice se è una briscola
+    // Dice se ï¿½ una briscola
     for (int i=0; i<40; i++) 
     {
         m.mazzo[i].briscola = false;
@@ -132,22 +132,24 @@ void dividiMazzo(Partita &p)
 		p.manoCorrente.carteComputer[x]=p.mazzo[i];
 		x++;
 	}
-    /* A questo punto il mazzo è tutto dentro p.mazzo, lungo 40 e ordinato
+    /* A questo punto il mazzo ï¿½ tutto dentro p.mazzo, lungo 40 e ordinato
     for (int i=0; i<20; i++) {
         int x = rand()%40; //Numero da 0 a 39
-        while (p.mazzo[x].distribuita) { // Finché è già stata distribuita
+        while (p.mazzo[x].distribuita) { // Finchï¿½ ï¿½ giï¿½ stata distribuita
             x = rand()%40;
         }
         p.manoCorrente.carteComputer[i] = p.mazzo[x];
         p.mazzo[x].distribuita = true;
-        while (p.mazzo[x].distribuita) { // Finché è già stata distribuita
+        while (p.mazzo[x].distribuita) { // Finchï¿½ ï¿½ giï¿½ stata distribuita
             x = rand()%40;
         }
         p.manoCorrente.carteGiocatore[i] = p.mazzo[x];
         p.mazzo[x].distribuita = true;
     }
-}*/
-// Funzione che ti dice se il mazzo è esaurito
+*/
+}
+
+// Funzione che ti dice se il mazzo ï¿½ esaurito
 bool controllo(Partita &p) {
     bool esaurito = true;
     for (int i = 0; i < 20; i++) {
@@ -160,7 +162,7 @@ bool controllo(Partita &p) {
 }
 
 
-// Funzione che fa gettare una carta al computer e che guarda se non è gia uscita
+// Funzione che fa gettare una carta al computer e che guarda se non ï¿½ gia uscita
 void computer(Partita &p) {
     int i = 0;
     while (p.manoCorrente.carteComputer[i].uscita)
@@ -177,7 +179,7 @@ int stampaCarteGiocatore(Partita &p) {
     cout << "COMPUTER: " << p.manoCorrente.cartaATerra.carta << " di " << p.manoCorrente.cartaATerra.seme << " (valore: " << p.manoCorrente.cartaATerra.valore << ')' << endl;//mette la carta buttata dal giocatore precendente(computre)
 	cout<<"Ecco le carte a disposizione"<<endl;
 	for (int i=0;i<3;i++) {  
-		if (!p.manoCorrente.carteGiocatore[i].uscita)//se non è uscita fa stampare
+		if (!p.manoCorrente.carteGiocatore[i].uscita)//se non ï¿½ uscita fa stampare
             cout << i+1 << ")" << p.manoCorrente.carteGiocatore[i].carta << " di " << p.manoCorrente.carteGiocatore[i].seme << " (valore: " << p.manoCorrente.carteGiocatore[i].valore << ')' << endl;
         else
             cout << i+1 << ")" << "<Carta uscita>" << endl;
@@ -185,7 +187,7 @@ int stampaCarteGiocatore(Partita &p) {
     cout<<"Carta: ";
     int scelta; // Carta scelta dal giocatore
     cin >> scelta;
-    while (scelta<1 || scelta>3 || p.manoCorrente.carteGiocatore[scelta-1].uscita) {//finchè  non è gia uscita continua a richiederla oppure hai scelto un numero diverso dal 1 2 3 
+    while (scelta<1 || scelta>3 || p.manoCorrente.carteGiocatore[scelta-1].uscita) {//finchï¿½  non ï¿½ gia uscita continua a richiederla oppure hai scelto un numero diverso dal 1 2 3 
         cout<<"Carta: ";
         cin >> scelta;
     }
@@ -204,17 +206,17 @@ int scaloCarte(Partita &p, int lunghezza,int sceltax) {
 // Funzione che ritorna true se la carta sfidante vince quella a terra, altrimenti false ??
 bool _vinceS(Carta terra, Carta sfidante) {
     if (terra.seme == sfidante.seme) {
-        // Se i semi sono uguali, vince quella con il valore più alto
+        // Se i semi sono uguali, vince quella con il valore piï¿½ alto
         return (terra.valore < sfidante.valore);
     } else {
         if (terra.briscola) {
-            // Se la carta a terra è di briscola vince
+            // Se la carta a terra ï¿½ di briscola vince
             return false;
         } else if (sfidante.briscola) {
-            // Se la carta sfidante è briscola e la carta a terra non lo è allora vince la sfidante
+            // Se la carta sfidante ï¿½ briscola e la carta a terra non lo ï¿½ allora vince la sfidante
             return true;
         } else {
-            // Se i semi sono diversi e nessuno è di briscola... allora vince la carta che era già a terra
+            // Se i semi sono diversi e nessuno ï¿½ di briscola... allora vince la carta che era giï¿½ a terra
             return false;
         }
     }
