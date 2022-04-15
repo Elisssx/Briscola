@@ -156,9 +156,8 @@ void computer(Partita &p) {
 // Funzione che mostra al giocatore le tre carte in cima al mazzetto e gliene fa scegliere una
 int stampaCarteGiocatore(Partita &p) {
     system("cls"); // Cancella lo schermo
-    cout << p.computer << " - " << p.giocatore << "   (Briscola: " << p.briscola << ")" << endl;
-    cout << "COMPUTER: " << p.manoCorrente.cartaATerra.carta << " di " << p.manoCorrente.cartaATerra.seme << " (valore: " << p.manoCorrente.cartaATerra.valore << ')' << endl;//mette la carta buttata dal giocatore precendente(computre)
-	cout<<"Ecco le carte a disposizione"<<endl;
+    cout << p.computer << " - " << p.giocatore << "   (Briscola: " << p.briscola << ")" << endl << endl;
+    cout << "COMPUTER: " << p.manoCorrente.cartaATerra.carta << " di " << p.manoCorrente.cartaATerra.seme << " (valore: " << p.manoCorrente.cartaATerra.valore << ')' << endl << endl;//mette la carta buttata dal giocatore precendente(computre)
 	for (int i=0;i<3;i++) {  
 		if (!p.manoCorrente.carteGiocatore[i].uscita)//se non è uscita fa stampare
             cout << i+1 << ")" << p.manoCorrente.carteGiocatore[i].carta << " di " << p.manoCorrente.carteGiocatore[i].seme << " (valore: " << p.manoCorrente.carteGiocatore[i].valore << ')' << endl;
@@ -221,7 +220,7 @@ int main()
     cout<<"inserisci nome utente"<<endl;
     string utente;
     cin>>utente;
-	cout<<" puoi scoprire le regole del gioco digitando '1'.  In alternativa puoi iniziare una nuova partita, digitando '2'"<<endl;
+	cout<<"Puoi scoprire le regole del gioco digitando '1'.  In alternativa puoi iniziare una nuova partita, digitando '2'"<<endl;
     cin>>istruzioni;
     if(istruzioni==1)
         spiegazionebriscola();
@@ -230,6 +229,8 @@ int main()
 
     // mazzo semi valori
     Partita m;
+    m.giocatore = 0;//azzera punteggi
+    m.computer = 0;
 
   	//random seme primario
     srand(time(0)); // Rende casuale la generazione di numeri casuali con rand() sulla base dell'orario corrente
