@@ -113,7 +113,7 @@ void inizializzaMazzo(Partita &m)
 // Divide il mazzo originale da 40 in 2 mani
 void dividiMazzo(Partita &p)
 {
-	for(int i=0;i<40;i++) //io intendevo fare un mazzo da 40 tutto disordinato e poi dividerlo
+	for(int i=0;i<40;i++) //io intendevo fare un mazzo da 40 tutto disordinato e poi dividerloo
 	{
 		int x=rand()%40;
 		while(p.mazzo[x].distribuita){
