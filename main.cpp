@@ -16,78 +16,27 @@ struct Mano
     string semeIniziale; // Il seme che è stato giocato per prima nella mano
     Carta carteGiocatore[20]; // Carte utente
     Carta carteComputer[20]; // Carte computer
+    Carta cartaATerra; // Carta che è appena stata gettata dal computer
     bool giocatore; // Quale giocatore ha giocato per primo in questa mano? True se è il computer, False se è l'umano.
-};
-struct Giocatore
-{
-   int punteggio;
 };
 struct Partita
 {
     string briscola; // Seme di briscola della partita corrente
-    Giocatore giocatore; // Giocatore che ha giocato per primo
-    Giocatore computer; // Computer
+    int giocatore; // punteggio Giocatore che ha giocato per primo
+    int computer; // punteggio Computer
     Carta mazzo[40]; // 40 carte totali
     Mano manoCorrente; // Mano corrente
 };
  
 void spiegazionebriscola()
 {
-    int x=1;
-    cout<<"Briscola è un gioco molto semplice, si dispongono di 40 carte, divise in 4 corrispettivi semi:"<<endl;
-    cout<<"bastoni"<<endl;
-    cout<<"coppa"<<endl;
-    cout<<"denari"<<endl;
-    cout<<"spade"<<endl;
-    cout<<"premi un tasto per continuare"<<endl;
-    
-    
-
-    cout<<"tutte le carte assumono un valore costante, ciò non succede però per le cosiddette ‘scartelle’, ovvero le carte numerate. Le carte numerate possono comportarsi in 3 modi diversi:."<<endl;
-	cout<<"se la scartella non appartiene al seme della partita e viene battuta contro una carta appartenente al seme della partita assume valore nullo"<<endl;
-	cout<<"se la scartella appartiene al seme della partita e viene battuta contro una carta non appartenente al seme di briscola, assume automaticamente il valore maggiore fra le due"<<endl;
-	cout<<"se la scartella viene battuta contro un’altra scartella vince quella dal valore maggiore"<<endl;
-	cout<<"queste regole non si applicano al 3, che ha sempre valore costante"<<endl;
-    cout<<"i valori delle carte sono i seguenti"<<endl;
-    cout<<"l'asso vale 11 punti "<<endl;
-    cout<<"il 3 vale 10 punti"<<endl;
-    cout<<"il re vale 4 punti"<<endl;
-    cout<<"il cavallo vale 3 punti"<<endl;
-    cout<<"il fante vale 2 punti"<<endl;
-    cout<<"schiaccia un pulsante per continuare"<<endl;
-    system("PAUSE");
-    
-    //qui dobbiamo capire come dichiarare  un invio, in quanto se dichiarata in int il compilatore procede solamente se x è un numero
-    cout<<"vengono consegnate 3 carte per ogni giocatore, in seguito viene pescata una carta che designerà il seme per la partita "<<endl;
-    cout<<"ovviamente le carte con il seme pescato vinceranno sempre contro qualsiasi carta di altro seme compreso l'asso."<<endl;
-    cout<<"Se vuoi una piccola curiosità digita 'si'"<<endl;
-    string si;
-    cin>>si;
-    if(si=="si")
-    {
-        cout<<"Nel gioco della briscola in coppia, non è possibile parlare tra compagni, e bisogna comunicare con la gestualità cercando di "<<endl;
-        cout<<"evitare lo sguardo degli avversari. Ecco i segni più frequenti con il corrispettivo significato"<<endl;
-        cout<<"distorcere la bocca indica il possesso del Tre"<<endl;
-        cout<<"alzare gli occhi al cielo indica il possesso del Re"<<endl;
-        cout<<"alzare leggermente una spalla per indicare il possesso del Fante"<<endl;
-        cout<<"mostrare la punta della lingua per indicare il possesso del Cavallo"<<endl;
-        cout<<"serrare le labbra per indicare il possesso dell’Asso"<<endl;
-        cout<<"Inoltre, è consentito ai giocatori appartenenti alla stessa squadra di scambiarsi le carte a vicenda, prima dell’ultima mano, per capire la strategia da mettere in campo"<<endl;
-		cout<<"premi 2 per tornare al gioco"<<endl;
-		cin>>x;
-		if(x==2)
-		{
-			//mi porta al gioco
-		}
-		
-    }
+    cout << "Cicucia";
 }
- 
 
 
 void inizializzaMazzo(Partita &m)
 {
-    for (int i = 0; i < 40; i++) //for per assegnare valore alle carte del mazzo
+    for (int i = 0; i < 40; i++) // Ciclo for per assegnare valore alle carte del mazzo
 	{
         m.mazzo[i].uscita = false; // All'inizio nessuna carta è ancora uscita
         if (i%10 == 0) 
@@ -99,27 +48,43 @@ void inizializzaMazzo(Partita &m)
         {
             m.mazzo[i].carta = "Due";
             m.mazzo[i].valore = 0;
-        } else if (i%10 == 2) {
+        } 
+        else if (i%10 == 2) {
             m.mazzo[i].carta = "Tre";
-               } else if (i%10 == 3) {
+            m.mazzo[i].valore = 10;
+        } 
+        else if (i%10 == 3) 
+        {
             m.mazzo[i].carta = "Quattro";
             m.mazzo[i].valore=0;
-            } else if (i%10 == 4) {
+        } 
+        else if (i%10 == 4)
+        {
             m.mazzo[i].carta = "Cinque";
             m.mazzo[i].valore=0;
-            } else if (i%10 == 5) {
+        } 
+        else if (i%10 == 5) 
+        {
             m.mazzo[i].carta = "Sei";
             m.mazzo[i].valore=0;
-            } else if (i%10 == 6) {
+        } 
+        else if (i%10 == 6) 
+        {
             m.mazzo[i].carta = "Sette";
             m.mazzo[i].valore=0;
-            } else if (i%10 == 7) {
+        } 
+        else if (i%10 == 7) 
+        {
             m.mazzo[i].carta = "Fante";
             m.mazzo[i].valore=2;
-            } else if (i%10 == 8) {
+        } 
+        else if (i%10 == 8) 
+        {
             m.mazzo[i].carta = "Cavallo";
             m.mazzo[i].valore=3;
-            } else if (i%10 == 9) {
+        } 
+        else if (i%10 == 9) 
+        {
             m.mazzo[i].carta = "Re";
             m.mazzo[i].valore=4;
         }
@@ -140,65 +105,100 @@ void inizializzaMazzo(Partita &m)
         if (m.mazzo[i].seme==m.briscola)
             m.mazzo[i].briscola=true;
     }
-    /*
-    for(int g=0;g<40;g++)
-    {
-        cout<<m.mazzo[g].seme<<' ';
-        cout<<m.mazzo[g].carta<<endl;
-  	}
-    */
 }
 
 
-void distribuisciCarte(Partita &p) //DISTRIBUISCE LE CARTE CON MAZZI DA 20 GIA PREDEFINITI!!!
+// Divide il mazzo originale da 40 in 2 mani
+void dividiMazzo(Partita &p)
 {
-    int contatore=0;
-    while (contatore < 40) 
-    {
-        int numero = rand() % 40;//genera un numero tra 0 e 40
+    
+    
+}
 
-        if(!p.mazzo[numero].uscita) // uscita � bool quindi se non � uscita la carta fa la procedura DOMANDA 
-        {
-            if (contatore%2 != 0) //se contatore � dispari va al giocatore
-            { 
-                p.manoCorrente.carteGiocatore[contatore]=p.mazzo[numero];
-                p.mazzo[numero].uscita=true;
-            } 
-            else // se contatore � pari va al pc
-            { 
-                p.manoCorrente.carteComputer[contatore] = p.mazzo[numero];
-                p.mazzo[numero].uscita = true;
-            }
+
+// Funzione che ti dice se il mazzo è esaurito
+bool controllo(Partita &p) {
+    bool esaurito = true;
+    for (int i = 0; i < 20; i++) {
+        if (!p.manoCorrente.carteComputer[i].uscita) // ! significa NOT
+            esaurito = false;
+        if (!p.manoCorrente.carteGiocatore[i].uscita)
+            esaurito = false;
+    }
+    return esaurito;
+}
+
+
+// Funzione che fa gettare una carta al computer e che guarda se non è gia uscita
+void computer(Partita &p) {
+    int i = 0;
+    while (p.manoCorrente.carteComputer[i].uscita)
+        i++;
+    p.manoCorrente.carteComputer[i].uscita = true;
+    p.manoCorrente.cartaATerra = p.manoCorrente.carteComputer[i];
+}
+
+
+// Funzione che mostra al giocatore le tre carte in cima al mazzetto e gliene fa scegliere una
+int stampaCarteGiocatore(Partita &p) {
+    system("cls"); // Cancella lo schermo
+    cout << p.computer << " - " << p.giocatore << "   (Briscola: " << p.briscola << ")" << endl;
+    cout << "COMPUTER: " << p.manoCorrente.cartaATerra.carta << " di " << p.manoCorrente.cartaATerra.seme << " (valore: " << p.manoCorrente.cartaATerra.valore << ')' << endl;//mette la carta buttata dal giocatore precendente(computre)
+	cout<<"Ecco le carte a disposizione"<<endl;
+	for (int i=0;i<3;i++) {  
+		if (!p.manoCorrente.carteGiocatore[i].uscita)//se non è uscita fa stampare
+            cout << i+1 << ")" << p.manoCorrente.carteGiocatore[i].carta << " di " << p.manoCorrente.carteGiocatore[i].seme << " (valore: " << p.manoCorrente.carteGiocatore[i].valore << ')' << endl;
+        else
+            cout << i+1 << ")" << "<Carta uscita>" << endl;
+    }
+    cout<<"Carta: ";
+    int scelta; // Carta scelta dal giocatore
+    cin >> scelta;
+    while (scelta<1 || scelta>3 || p.manoCorrente.carteGiocatore[scelta-1].uscita) {//finchè  non è gia uscita continua a richiederla oppure hai scelto un numero diverso dal 1 2 3 
+        cout<<"Carta: ";
+        cin >> scelta;
+    }
+    return scelta-1; // Carta corretta da mettere nell'array   
+}
+
+
+// Funzione che scala tutte le carte al di sotto di sceltax in alto di una posizione
+int scaloCarte(Partita &p, int lunghezza,int sceltax) {
+    for(int i=sceltax; i<lunghezza-1; i++)// Tira tutte le carte indietro di uno 
+        p.manoCorrente.carteGiocatore[i] = p.manoCorrente.carteGiocatore[i+1];
+}
+
+
+// Funzione che ritorna true se la carta sfidante vince quella a terra, altrimenti false ☑️
+bool _vinceS(Carta terra, Carta sfidante) {
+    if (terra.seme == sfidante.seme) {
+        // Se i semi sono uguali, vince quella con il valore più alto
+        return (terra.valore < sfidante.valore);
+    } else {
+        if (terra.briscola) {
+            // Se la carta a terra è di briscola vince
+            return false;
+        } else if (sfidante.briscola) {
+            // Se la carta sfidante è briscola e la carta a terra non lo è allora vince la sfidante
+            return true;
+        } else {
+            // Se i semi sono diversi e nessuno è di briscola... allora vince la carta che era già a terra
+            return false;
         }
-        contatore++;
     }
 }
 
 
-bool controllo(Partita &p) { // Funzione che ti dice se il mazzo è esaurito
-    bool esaurito = true;
-    for (int i = 0; i < 40; i++)
-        if (!p.mazzo[i].uscita) // ! significa NOT
-            esaurito = false;
-    return esaurito;
+// Funzione che assegna i punti
+void assegnaPunti(Partita &p, int s) {
+    // Se la carta sfidante vince la carta a terra, allora il giocatore guadagna un punto
+    if (_vinceS(p.manoCorrente.cartaATerra, p.manoCorrente.carteGiocatore[s]))// Se la carta del giocatore batte quella del computer
+        p.giocatore += p.manoCorrente.cartaATerra.valore + p.manoCorrente.carteGiocatore[s].valore;//se _vinceS ritorna true i punti vanno al giocatore
+    else
+        p.computer += p.manoCorrente.cartaATerra.valore + p.manoCorrente.carteGiocatore[s].valore;//se _vinceS ritorna false i punti vanno al PC
 }
-int tishowolecarte(Partita &p,int numc){//!!!!!!ho provato a fare quello che avevamo detto ieri sera nelle due funzioni 
-	cout<<"ecco le tue carte a disposizione"<<endl;
-	for(int i=0;i<3;i++)
-	{
-		cout<<"1) "<<p.carteGiocatore[i]<<endl;;
-	}
-	cout<<"scegli una delle seguenti carte"<<endl;
-	cin>>numc;
-	return numc;
-	
-}
-int scalocarta(Partita &p,int numc){
-	for(int i=numc;i<20-1;i++)
-	{
-		p.carteGiocatore[i]=p.carteGiocatore[i+1];//!!!!!non so che struct mettere qua c'� le carte che ha in mano il giocatore 
-	}
-}
+
+
 int main() 
 {
 	int istruzioni;
@@ -209,14 +209,9 @@ int main()
 	cout<<" puoi scoprire le regole del gioco digitando '1'.  In alternativa puoi iniziare una nuova partita, digitando '2'"<<endl;
     cin>>istruzioni;
     if(istruzioni==1)
-    {
         spiegazionebriscola();
-    }
-    else
-    {
-    	if(istruzioni!=2)
-    		return 0;
-    }
+    else if(istruzioni!=2)
+    	return 0;
 
     // mazzo semi valori
     Partita m;
@@ -233,57 +228,16 @@ int main()
     else if (s == 3)
         m.briscola = "Coppe";
 
-    inizializzaMazzo(m); // Ciao
-
-    // Funzione che distribuisce le tre carte in mano al giocatore
-    distribuisciCarte(m);
-    int cartascelta;
+    inizializzaMazzo(m);
+    dividiMazzo(m);
+    int x=20; // Lunghezza residua del mazzo del giocatore
     
     while(!controllo(m))
     {
-    	tishowolecarte(m,cartascelta);
-    	scalocarta(m.cartascelta);
+        computer(m);
+    	int s = stampaCarteGiocatore(m);
+        assegnaPunti(m, s);
+    	scaloCarte(m, x, s);
 	}
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-    while (!controllo(m)) 
-    {
-
-        mossaComputer(m);
-        mossaUtente(m);
-
-        //if per verificare se le carte hanno seme dominantem, if per verificare la carta con valore maggiore fra le due
-
-        //ripetizione assegnazione carta (una carta) ☑️
-        //quando il mazzo finisce finisce la partita ☑️
-        
-        
-        //file di testo che memorizza il punteggio degli utenti
-    }
-
-    // Funzione che fa il conteggio dei punti
   	return 0;
 }
