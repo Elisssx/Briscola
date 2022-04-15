@@ -91,15 +91,16 @@ void inizializzaMazzo(Partita &m)
             m.mazzo[i].valore=4;
         }
         // cosi per tutte le carte
-        if (i%4 == 0)
+        if (i<10)
             m.mazzo[i].seme = "Spada";
-        if (i%4 == 1)
+        if (i<20&&i>=10) //cosi nn ci sono doppioni
             m.mazzo[i].seme = "Bastoni";
-        if (i%4 == 2)
+        if (i<30&&i>=20)
             m.mazzo[i].seme = "Denari";
-        if (i%4 == 3)
+        if (i<40&&i>=30)
             m.mazzo[i].seme = "Coppe";
     }
+
     // Dice se � una briscola
     for (int i=0; i<40; i++) 
     {
@@ -113,27 +114,9 @@ void inizializzaMazzo(Partita &m)
 // Divide il mazzo originale da 40 in 2 mani
 void dividiMazzo(Partita &p)
 {
-	for(int i=0;i<40;i++) //io intendevo fare un mazzo da 40 tutto disordinato e poi dividerloo
+    // A questo punto il mazzo � tutto dentro p.mazzo, lungo 40 e ordinato
+    for (int i=0; i<20; i++) 
 	{
-		int x=rand()%40;
-		while(p.mazzo[x].distribuita){
-			x=rand()%40;
-		}
-		p.mazzo[i]=p.mazzo[x];
-		p.mazzo[x].distribuita=true;
-	}
-	for(int i=0;i<20;i++)
-	{
-		p.manoCorrente.carteGiocatore[x]=p.mazzo[i];
-	}
-	int x=0;
-	for(int i=20;i<40&&x<20;i++)
-	{
-		p.manoCorrente.carteComputer[x]=p.mazzo[i];
-		x++;
-	}
-    /* A questo punto il mazzo � tutto dentro p.mazzo, lungo 40 e ordinato
-    for (int i=0; i<20; i++) {
         int x = rand()%40; //Numero da 0 a 39
         while (p.mazzo[x].distribuita) { // Finch� � gi� stata distribuita
             x = rand()%40;
@@ -146,7 +129,6 @@ void dividiMazzo(Partita &p)
         p.manoCorrente.carteGiocatore[i] = p.mazzo[x];
         p.mazzo[x].distribuita = true;
     }
-*/
 }
 
 // Funzione che ti dice se il mazzo � esaurito
