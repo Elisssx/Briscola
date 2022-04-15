@@ -24,7 +24,7 @@ struct Partita
 {
     string briscola; // Seme di briscola della partita corrente
     int giocatore; // punteggio Giocatore che ha giocato per primo
-    int computer; // punteggio Computer
+    int computer; // punteggio Computerr
     Carta mazzo[40]; // 40 carte totali
     Mano manoCorrente; // Mano corrente
 };
