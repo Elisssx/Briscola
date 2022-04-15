@@ -14,9 +14,8 @@ struct Carta
 struct Mano
 {
     string semeIniziale; // Il seme che Ã¨ stato giocato per prima nella mano
-    Carta carteGiocate[6]; // Carte che sono state giocate (abbastanza inutile come cosa)
-    Carta carteGiocatore[3]; // Carte utente
-    Carta carteComputer[3]; // Carte computer
+    Carta carteGiocatore[20]; // Carte utente
+    Carta carteComputer[20]; // Carte computer
     bool giocatore; // Quale giocatore ha giocato per primo in questa mano? True se Ã¨ il computer, False se Ã¨ l'umano.
 };
 struct Giocatore
@@ -151,23 +150,22 @@ void inizializzaMazzo(Partita &m)
 }
 
 
-void distribuisciCarte(Partita &p) //DISTRIBUISCE LE CARTE
+void distribuisciCarte(Partita &p) //DISTRIBUISCE LE CARTE CON MAZZI DA 20 GIA PREDEFINITI!!!
 {
     int contatore=0;
-    while (contatore < 6) 
+    while (contatore < 40) 
     {
-        // Prima generi un numero casuale da 0 a 39
-        int numero = rand() % 40;
+        int numero = rand() % 40;//genera un numero tra 0 e 40
 
-        if(!p.mazzo[numero].uscita) // "Se la carta non Ã¨ giÃ  uscita...
+        if(!p.mazzo[numero].uscita) // uscita è bool quindi se non è uscita la carta fa la procedura DOMANDA 
         {
-            if (contatore%2 != 0) //controllo se Ã¨ pari o dispari
+            if (contatore%2 != 0) //se contatore è dispari va al giocatore
             { 
                 p.manoCorrente.carteGiocatore[contatore]=p.mazzo[numero];
                 p.mazzo[numero].uscita=true;
             } 
-            else // Quella carta appartiene al computer se Ã¨ pari
-            { // Se contatore Ã¨ 0, 2 oppure 4 allora va al computer
+            else // se contatore è pari va al pc
+            { 
                 p.manoCorrente.carteComputer[contatore] = p.mazzo[numero];
                 p.mazzo[numero].uscita = true;
             }
@@ -184,8 +182,23 @@ bool controllo(Partita &p) { // Funzione che ti dice se il mazzo Ã¨ esaurito
             esaurito = false;
     return esaurito;
 }
-
-
+int tishowolecarte(Partita &p,int numc){//!!!!!!ho provato a fare quello che avevamo detto ieri sera nelle due funzioni 
+	cout<<"ecco le tue carte a disposizione"<<endl;
+	for(int i=0;i<3;i++)
+	{
+		cout<<"1) "<<p.carteGiocatore[i]<<endl;;
+	}
+	cout<<"scegli una delle seguenti carte"<<endl;
+	cin>>numc;
+	return numc;
+	
+}
+int scalocarta(Partita &p,int numc){
+	for(int i=numc;i<20-1;i++)
+	{
+		p.carteGiocatore[i]=p.carteGiocatore[i+1];//!!!!!non so che struct mettere qua c'è le carte che ha in mano il giocatore 
+	}
+}
 int main() 
 {
 	int istruzioni;
@@ -224,6 +237,37 @@ int main()
 
     // Funzione che distribuisce le tre carte in mano al giocatore
     distribuisciCarte(m);
+    int cartascelta;
+    
+    while(!controllo(m))
+    {
+    	tishowolecarte(m,cartascelta);
+    	scalocarta(m.cartascelta);
+	}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     while (!controllo(m)) 
     {
