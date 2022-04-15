@@ -78,13 +78,13 @@ void inizializzaMazzo(Partita &m)
             m.mazzo[i].carta = "Re";
             m.mazzo[i].valore=4;
         }
-        if (i%4 == 0)
+        if (i<10)
             m.mazzo[i].seme = "Spade";
-        if (i%4 == 1)
+        if (i<20&&i>=10)
             m.mazzo[i].seme = "Bastoni";
-        if (i%4 == 2)
+        if (i<30&&i>=20)
             m.mazzo[i].seme = "Denari";
-        if (i%4 == 3)
+        if (i<40&&i>=30)
             m.mazzo[i].seme = "Coppe";
     }
     // Dice se è una briscola
