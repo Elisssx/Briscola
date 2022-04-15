@@ -10,6 +10,7 @@ struct Carta
     string seme;
     bool briscola;
     bool uscita; // La carta è già uscita?
+    bool distribuita; // La carta è già stata distribuita?
 };
 struct Mano
 {
@@ -39,6 +40,7 @@ void inizializzaMazzo(Partita &m)
     for (int i = 0; i < 40; i++) // Ciclo for per assegnare valore alle carte del mazzo
 	{
         m.mazzo[i].uscita = false; // All'inizio nessuna carta è ancora uscita
+        m.mazzo[i].distribuita = false; // All'inizio nessuna carta è ancora stata distribuita
         if (i%10 == 0) 
         {
             m.mazzo[i].carta = "Asso";
@@ -111,8 +113,20 @@ void inizializzaMazzo(Partita &m)
 // Divide il mazzo originale da 40 in 2 mani
 void dividiMazzo(Partita &p)
 {
-    
-    
+    // A questo punto il mazzo è tutto dentro p.mazzo, lungo 40 e ordinato
+    for (int i=0; i<20; i++) {
+        int x = rand()%40; //Numero da 0 a 39
+        while (p.mazzo[x].distribuita) { // Finché è già stata distribuita
+            x = rand()%40;
+        }
+        p.manoCorrente.carteComputer[i] = p.mazzo[x];
+        p.mazzo[x].distribuita = true;
+        while (p.mazzo[x].distribuita) { // Finché è già stata distribuita
+            x = rand()%40;
+        }
+        p.manoCorrente.carteGiocatore[i] = p.mazzo[x];
+        p.mazzo[x].distribuita = true;
+    }
 }
 
 
@@ -158,6 +172,7 @@ int stampaCarteGiocatore(Partita &p) {
         cout<<"Carta: ";
         cin >> scelta;
     }
+    p.manoCorrente.carteGiocatore[scelta-1].uscita = true;
     return scelta-1; // Carta corretta da mettere nell'array   
 }
 
