@@ -124,7 +124,7 @@ void dividiMazzo(Partita &p)
 	}
 	for(int i=0;i<20;i++)
 	{
-		p.manoCorrente.carteGiocatore[i]=p.mazzo[i];
+		p.manoCorrente.carteGiocatore[x]=p.mazzo[i];
 	}
 	int x=0;
 	for(int i=20;i<40&&x<20;i++)
