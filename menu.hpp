@@ -40,7 +40,13 @@ bool esisteUtente(string username, int n) {
 
 // Funzione che legge il file statistiche.txt e ritorna i dati in un array
 void leggiFile(string nomi[], int dati[][5], int n) {
-    
+    ifstream file("statistiche.txt", ios::in);
+    for (int i = 0; i < n; i++) { // "Per ogni riga..."
+        file >> nomi[i]; // La prima cosa che leggi va nell'array nomi perché è l'username
+        for (int j = 0; j < 5; j++) { // "I successivi cinque valori..."
+            file >> dati[i][j]; // Vengono messi dentro la matrice dati
+        }
+    }
 }
 
 
