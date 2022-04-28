@@ -3,15 +3,6 @@
 using namespace std;
 
 
-void _main(string user, int punteggio) {
-    int righe = contaRighe();
-    if (!esisteUtente(user))
-        righe++;
-    string nomi[righe];
-    int dati[righe][5];
-}
-
-
 // Funzione che ritorna il numero di righe presenti in statistiche.txt
 int contaRighe() {
     ifstream file("statistiche.txt", ios::in);
@@ -52,11 +43,66 @@ void leggiFile(string nomi[], int dati[][5], int n) {
 
 // Funzione che inserisce i dati dell'utente nelle statistiche
 void inserisciUtente(string nomi[], int dati[][5], string username, int punteggio, int n) {
-    
+    int pos;
+    if (esisteUtente(username, n)==true) { // L'utente esiste
+        for (int i=0; i<n; i++) {
+            if (nomi[i] == username)
+                pos = i;
+        }
+        dati[pos][0] += punteggio;
+        dati[pos][1]++;
+        if (punteggio < 60)
+            dati[pos][2]++;
+        else if (punteggio == 60)
+            dati[pos][3]++;
+        else
+            dati[pos][4]++;
+    } else {
+        pos = n;
+        nomi[pos] = username;
+        dati[pos][0] = punteggio;
+        dati[pos][1]++;
+        dati[pos][2] = 0;
+        dati[pos][3] = 0;
+        dati[pos][4] = 0;
+        if (punteggio < 60)
+            dati[pos][2]++;
+        else if (punteggio == 60)
+            dati[pos][3]++;
+        else
+            dati[pos][4]++;
+    }
 }
 
 
 // Funzione che rimette i dati dell'utente nelle statistiche.txt
 void stampaFile(string nomi[], int dati[][5], int n) {
-    
+    for (int i = 0; i < n; i++) {
+        cout << nomi[i] << " ";
+        for (int j = 0; j < 5; j++) {
+            cout << dati[i][j] << " ";
+        }
+        cout << endl;
+    }
+}
+
+
+// Stampa le statistiche
+void stampaStatistiche() {
+    // Viva le tette
+    ifstream file;
+    file.open("statistiche.txt", ios::in);
+    string s;
+    while (getline(file, s))
+        cout << s << endl;
+    system("pause");
+}
+
+
+void registraUtente(string user, int punteggio) {
+    int righe = contaRighe();
+    if (!esisteUtente(user, righe))
+        righe++;
+    string nomi[righe];
+    int dati[righe][5];
 }
