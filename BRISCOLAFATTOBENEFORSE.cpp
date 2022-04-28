@@ -1,6 +1,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <time.h>
+#include "menu.hpp"
 using namespace std;
  
 struct Carta 
@@ -217,6 +218,7 @@ void assegnaPunti(Partita &p, int s) {
 
 int main() 
 {
+    stampaStatistiche();
 	int istruzioni;
     cout<<"Benvenuto su briscola"<<endl;
     cout<<"inserisci nome utente"<<endl;
@@ -257,6 +259,7 @@ int main()
         assegnaPunti(m, s);
     	scaloCarte(m, x, s);
 	}
+    registraUtente(utente, m.giocatore);
   	return 0;
 }
 
