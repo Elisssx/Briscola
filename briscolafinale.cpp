@@ -33,10 +33,7 @@ struct Partita
     Mano manoCorrente; // Mano corrente
 };
  
-void spiegazionebriscola()
-{
-    cout << "Cicucia";
-}
+
 
 
 void inizializzaMazzo(Partita &m)
@@ -158,6 +155,7 @@ void computer(Partita &p) {
 }
 
 
+
 // Funzione che mostra al giocatore le tre carte in cima al mazzetto e gliene fa scegliere una
 int stampaCarteGiocatore(Partita &p) {
     system("cls"); // Cancella lo schermo
@@ -223,18 +221,18 @@ int main()
 {
 	
     stampaStatistiche();
-	int istruzioni;
+	
     cout<<"Benvenuto su briscola"<<endl;
     cout<<"inserisci nome utente"<<endl;
     string utente;
     cin>>utente;
-	cout<<"Questo gioco funziona come una normale partita ma...contro un computer avrai 3 carte a disposizione a te basta scegliere la carta vincente!"<<endl;
+	cout<<"questo gioco si svolgerà come una normale partita di briscola, con la sola differenza che il tuo avversario sarà il computer, a te basterà scegliere la carta vincente"<<endl;
 	cout<<"Digita 'continua' per andare avanti"<<endl;
 	string continua;
 	cin>>continua;
 	while(continua!="continua")
 	{
-		cout<<"rinserisci"<<endl;
+		cout<<"Digita 'continua' per andare avanti"<<endl;
 		cin>>continua;
 	}
 
@@ -268,5 +266,4 @@ int main()
 	}
     registraUtente(utente, m.giocatore);
   	return 0;
-}
-
+} 	return 0;
