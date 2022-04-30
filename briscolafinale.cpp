@@ -266,4 +266,4 @@ int main()
 	}
     registraUtente(utente, m.giocatore);
   	return 0;
-} 	return 0;
+}
