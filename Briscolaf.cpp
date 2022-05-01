@@ -29,12 +29,6 @@ struct Partita
     Carta mazzo[40]; // 40 carte totali
     Mano manoCorrente; // Mano corrente
 };
- 
-void spiegazionebriscola()
-{
-    cout << "Cicucia";
-}
-
 
 void inizializzaMazzo(Partita &m)
 {
@@ -167,6 +161,14 @@ int stampaCarteGiocatore(Partita &p) {
         else
             cout << i+1 << ")" << "<Carta uscita>" << endl;
     }
+    cout<<""<<endl;
+    if(p.giocatore>p.computer)
+        cout<<"Bravo! stai vincendo :)"<<endl;
+    if(p.giocatore<p.computer)
+        cout<<"Stai perdendo...devi riformulare la tua strategia :("<<endl;
+    if(p.giocatore==p.computer)
+        cout<<"Continua cosi' stai pareggiando!! "<<endl;
+    cout<<""<<endl;
     cout<<"Carta: ";
     int scelta; // Carta scelta dal giocatore
     cin >> scelta;
@@ -185,6 +187,7 @@ int scaloCarte(Partita &p, int lunghezza,int sceltax) {
     {
         p.manoCorrente.carteGiocatore[i] = p.manoCorrente.carteGiocatore[i+1];
 	}
+}
 
 
 // Funzione che ritorna true se la carta sfidante vince quella a terra, altrimenti false ??
@@ -214,6 +217,7 @@ void assegnaPunti(Partita &p, int s) {
         p.giocatore += p.manoCorrente.cartaATerra.valore + p.manoCorrente.carteGiocatore[s].valore;//se _vinceS ritorna true i punti vanno al giocatore
     else
         p.computer += p.manoCorrente.cartaATerra.valore + p.manoCorrente.carteGiocatore[s].valore;//se _vinceS ritorna false i punti vanno al PC
+        
 }
 
 
