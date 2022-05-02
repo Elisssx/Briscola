@@ -1,7 +1,6 @@
 Aaron 700 10 1 1 8 
-Aurora 10 1 1 0 0 
+Aurora 38 2 2 0 0 
 Mattia 28 1 2 0 0 
 Elisa 2 0 1 0 0 
 Lorenzo 9 1 2 0 0 
-Sebastian 2 1 1 0 0 
 Chiara 4 1 1 0 0 
