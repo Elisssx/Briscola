@@ -130,7 +130,7 @@ void dividiMazzo(Partita &p)
 
 // Funzione che ti dice se il mazzo ? esaurito
 bool controllo(int x) {
-    return x<=16;
+    return x<=1;
     /*
     bool esaurito = true;
     for (int i = 0; i < 20; i++) {
@@ -249,10 +249,11 @@ bool esisteUtente(string username, int n) {
     ifstream file("statistiche.txt", ios::in);
     string line;
     for (int i = 0; i < n; i++) {
-        getline(file, line);
-        if (line == username) {
+        file >> line;
+        if (line == username) // Line in questo momento è solo il primo elemento della linea
             return true;
-        }
+        for (int j = 0; j < 5; j++) // Scorro i numeri, che non mi interessano
+            file >> line;
     }
     return false;
 }
@@ -291,11 +292,9 @@ void inserisciUtente(string nomi[], int dati[][5], string username, int punteggi
     } 
     else {
         pos = n-1;
-        cout << username << endl;
-        cout << nomi[pos] << endl;
         nomi[pos] = username;
         dati[pos][0] = punteggio;
-        dati[pos][1] = 0;
+        dati[pos][1] = 1;
         dati[pos][2] = 0;
         dati[pos][3] = 0;
         dati[pos][4] = 0;
@@ -348,7 +347,7 @@ void scriviFile(string nomi[], int dati[][5], int n) {
 
 void registraUtente(string user, int punteggio)
 {
-    int righe = contaRighe()+1;
+    int righe = contaRighe();
     
     if (!esisteUtente(user, righe))
         righe++;
