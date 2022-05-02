@@ -1,6 +1,8 @@
 #include <cstdlib>
 #include <iostream>
+#include <fstream>
 #include <time.h>
+// g++ briscolaf.cpp -o briscolaf.exe
 
 using namespace std;
  
@@ -127,7 +129,9 @@ void dividiMazzo(Partita &p)
 }
 
 // Funzione che ti dice se il mazzo ? esaurito
-bool controllo(Partita &p) {
+bool controllo(int x) {
+    return x<=16;
+    /*
     bool esaurito = true;
     for (int i = 0; i < 20; i++) {
         if (!p.manoCorrente.carteComputer[i].uscita) // ! significa NOT
@@ -136,6 +140,7 @@ bool controllo(Partita &p) {
             esaurito = false;
     }
     return esaurito;
+    */
 }
 
 
@@ -225,12 +230,9 @@ void assegnaPunti(Partita &p, int s) {
     
     
     
+void stampaFile(string nomi[], int dati[][5], int n);
     
-    
-    
-    
-    
-    // Funzione che ritorna il numero di righe presenti in statistiche.txt
+// Funzione che ritorna il numero di righe presenti in statistiche.txt
 int contaRighe() {
     ifstream file("statistiche.txt", ios::in);
     int count = 0;
@@ -288,10 +290,12 @@ void inserisciUtente(string nomi[], int dati[][5], string username, int punteggi
             dati[pos][4]++;
     } 
     else {
-        pos = n;
+        pos = n-1;
+        cout << username << endl;
+        cout << nomi[pos] << endl;
         nomi[pos] = username;
         dati[pos][0] = punteggio;
-        dati[pos][1]++;
+        dati[pos][1] = 0;
         dati[pos][2] = 0;
         dati[pos][3] = 0;
         dati[pos][4] = 0;
@@ -329,19 +333,31 @@ void stampaStatistiche() {
 }
 
 
+void scriviFile(string nomi[], int dati[][5], int n) {
+    ofstream file;
+    file.open("statistiche.txt", ios::out);
+    for (int i = 0; i < n; i++) {
+        file << nomi[i] << " ";
+        for (int j = 0; j < 5; j++) {
+            file << dati[i][j] << " ";
+        }
+        file << endl;
+    }
+}
+
+
 void registraUtente(string user, int punteggio)
 {
-    int righe = contaRighe();
+    int righe = contaRighe()+1;
     
     if (!esisteUtente(user, righe))
         righe++;
          
     string nomi[righe];
     int dati[righe][5];
-    leggiFile(nomi, dati, righe); 
-    inserisciUtente( nomi, dati, user, punteggio, righe); 
-   
-    
+    leggiFile(nomi, dati, righe);
+    inserisciUtente(nomi, dati, user, punteggio, righe);
+    scriviFile(nomi, dati, righe);
 }
 
 
@@ -381,20 +397,16 @@ int main()
     inizializzaMazzo(m);
     dividiMazzo(m);
     int x=20; // Lunghezza residua del mazzo del giocatore
-    
-    while(!controllo(m))
+
+    while(!controllo(x))
     {
         computer(m);
     	int s = stampaCarteGiocatore(m);
         assegnaPunti(m, s);
     	scaloCarte(m, x, s);
+        x--;
 	}
     registraUtente(utente, m.giocatore);
-    
-    
-
-    
-    
 
   	return 0;
 }
