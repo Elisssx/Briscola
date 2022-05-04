@@ -4,3 +4,4 @@ Mattia 28 1 2 0 0
 Elisa 2 0 1 0 0 
 Lorenzo 9 1 2 0 0 
 Chiara 4 1 1 0 0 
+Ettore 36 1 1 0 0 
