@@ -128,7 +128,7 @@ void dividiMazzo(Partita &p)
     }
 }
 
-// Funzione che ti dice se il mazzo ? esaurito
+// Funzione che ti dice se il mazzo è esaurito
 bool controllo(int x) {
     return x<=1;
     /*
@@ -378,7 +378,7 @@ int main()
 	}
 	// mazzo semi valori
     Partita m;
-     m.giocatore = 0;//azzera punteggi
+    m.giocatore = 0;//azzera punteggi
     m.computer = 0;
 
   	//random seme primario
